@@ -15,7 +15,15 @@ class Auth:
         """
         require_auth method
         """
-        return False
+        if path is None:
+            return True
+        if not excluded_paths:
+            return True
+        path = path.rstrip("/") + "/"
+        for excluded_path in excluded_paths:
+            if excluded_path.rstrip("/") + "/" == path:
+                return False
+        return True
 
     def authorization_header(self, request=None) -> str:
         """
