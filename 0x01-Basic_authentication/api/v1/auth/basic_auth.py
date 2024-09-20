@@ -5,6 +5,7 @@ Route module for the API
 from flask import request
 from typing import List, TypeVar
 from api.v1.auth.auth import Auth
+from base64 import b64decode
 
 
 class BasicAuth(Auth):
@@ -36,6 +37,6 @@ class BasicAuth(Auth):
         if not isinstance(base64_authorization_header, str):
             return None
         try:
-            return base64_authorization_header.encode('utf-8').decode('base64')
+            return b64decode(base64_authorization_header).decode('utf-8')
         except BaseException:
             return None
