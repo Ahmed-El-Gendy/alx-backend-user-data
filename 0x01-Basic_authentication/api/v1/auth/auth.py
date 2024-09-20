@@ -29,7 +29,7 @@ class Auth:
         """
         authorization_header method
         """
-        if request == None:
+        if request is None:
             return request
         if "Authorization" not in request.headers:
             return None
